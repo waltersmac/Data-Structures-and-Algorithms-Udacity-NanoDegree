@@ -20,33 +20,16 @@ Print messages:
 "Last record of calls, <incoming number> calls <answering number> at time <time>, lasting <during> seconds"
 """
 
-import datetime
-
+# Obtaining data from texts.csv
 first_text = texts[0][0]
 ans_text = texts[0][1]
 time_text = texts[0][2].split()[1]
 
+# Obtaining data from calls.csv
 last_call = calls[-1][0]
 ans_call = calls[-1][1]
 time_call = calls[-1][2].split()[1]
-dur_call = calls[-1][2].split()[1]
-
-def time_secs(my_time):
-	time = my_time.split(':')
-	time[0] = int(time[0]) * 60 * 60
-	time[1] = int(time[1]) * 60
-	time[2] = int(time[2])
-	seconds = sum(time)
-
-	return seconds
-
-
-duration = time_secs(dur_call) - time_secs(time_call)
-print(time_secs(dur_call))
-print(time_secs(time_call))
-print(duration)
-
-# secs = datetime.time(dur_call) - datetime.time(time_call)
+dur_call = calls[-1][3]
 
 print("First record of texts, {} texts {} at time {}".format(first_text, ans_text, time_text))
 print("Last record of calls, {} calls {} at time {}, lasting {} seconds".format(last_call, ans_call, time_call, dur_call))
