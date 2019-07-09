@@ -20,3 +20,29 @@ Print a message:
 September 2016.".
 """
 
+def longest_dur(data):
+    
+    # Creating a dictionary for number
+    # and duration time
+    calls_dict = {}
+    
+    # Adding numbers from number initiating the call
+    # and also receiving the call
+    for i in data:
+    	calls_dict[i[0]] = int(i[3])
+    	calls_dict[i[1]] = int(i[3])
+    
+    num_max = None
+    num_dur = 0
+
+    for k,v in calls_dict.items():
+    	if v > num_dur:
+    		num_dur = v
+    		num_max = k
+
+    return [num_max, str(num_dur)]
+
+number, time = longest_dur(calls)
+
+print("{} spent the longest time, {} seconds, on the phone during September 2016.".format(number, time))
+
