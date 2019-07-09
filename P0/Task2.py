@@ -34,7 +34,8 @@ def longest_dur(data):
     
     num_max = None
     num_dur = 0
-
+    
+    # Find the number with the maximum duration
     for k,v in calls_dict.items():
     	if v > num_dur:
     		num_dur = v
