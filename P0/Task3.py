@@ -43,3 +43,59 @@ Print the answer as a part of a message::
 to other fixed lines in Bangalore."
 The percentage should have 2 decimal digits
 """
+
+# Part A
+def list_codes(data):
+    
+    # Bangalore codes and prefixes
+	area_code = '080'
+	mob_prefix = ['7','8','9']
+	tele_mark = '140'
+
+	# Creating list of codes
+	list_of_codes = []
+    
+    # Adding Bangalore to the list
+	for i in calls:
+		if area_code in i[0]:
+			list_of_codes.append(area_code)
+
+		elif i[0][0] in mob_prefix:
+			list_of_codes.append(i[0][0:5])
+
+		elif tele_mark in i[0]:
+			list_of_codes.append(tele_mark)
+    
+    # Unique set of codes created
+	codes = sorted(set(list_of_codes))
+
+	return '\n'.join(codes)
+
+
+print("The numbers called by people in Bangalore have codes:")
+print(list_codes(calls))
+
+
+# Part B
+def list_num(data):
+    
+    # Bangalore codes and prefixes
+	area_code = '(080)'
+	mob_prefix = ['7','8','9']
+	tele_mark = '140'
+
+	# Creating list of numbers
+	num_calls = len(calls)
+	nums = 0
+
+    # Adding Bangalore to the list
+	for i in calls:
+		if area_code in i[0] and area_code in i[1]:
+			nums += 1
+    
+    # Calculating percentage of '080' numbers
+	percentage = (nums/num_calls) * 100
+	
+	return(round(percentage, 2))
+
+print("{} percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.".format(list_num(calls)))
