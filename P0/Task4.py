@@ -25,3 +25,25 @@ Print a message:
 The list of numbers should be print out one per line in lexicographic order with no duplicates.
 """
 
+def tele_mark(data):
+    
+	tele_mark = '140'
+
+	list_of_numbers = []
+    
+    # Telephone marketing numbers added to list
+	for i in calls:
+
+		# Matching the 140 code with the first 
+		# 3 digits of each source number
+		if tele_mark == i[0][0:3]:
+			list_of_numbers.append(i[0])
+    
+    # Unique set of telephone marketing numbers
+	list_of_numbers = sorted(set(list_of_numbers))
+    
+	return '\n'.join(list_of_numbers)
+
+print("These numbers could be telemarketers: ")
+print(tele_mark(calls))
+
