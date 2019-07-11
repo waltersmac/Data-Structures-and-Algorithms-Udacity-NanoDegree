@@ -25,25 +25,35 @@ Print a message:
 The list of numbers should be print out one per line in lexicographic order with no duplicates.
 """
 
-def tele_mark(data):
-    
-	tele_mark = '140'
+def tele_mark(text_data, call_data):
 
-	list_of_numbers = []
-    
-    # Telephone marketing numbers added to list
-	for i in calls:
+	list_of_numbers = set()
 
-		# Matching the 140 code with the first 
-		# 3 digits of each source number
-		if tele_mark == i[0][0:3]:
-			list_of_numbers.append(i[0])
-    
-    # Unique set of telephone marketing numbers
-	list_of_numbers = sorted(set(list_of_numbers))
-    
-	return '\n'.join(list_of_numbers)
+	send_texts = set()
+	rec_texts = set()
+	incoming_calls = set()
+	outgoing_calls = set()
+
+	for i in text_data:
+		if i[0] not in send_texts:
+			send_texts.add(i[0])
+
+		if i[1] not in rec_texts:
+			rec_texts.add(i[1])
+
+	for i in call_data:
+		if i[0] not in outgoing_calls:
+			outgoing_calls.add(i[0])
+
+		if i[1] not in incoming_calls:
+			incoming_calls.add(i[1])
+
+	for i in outgoing_calls:
+		if i not in send_texts and i not in rec_texts and i not in incoming_calls:
+			list_of_numbers.add(i)
+
+	return '\n'.join(sorted(list_of_numbers))
+
 
 print("These numbers could be telemarketers: ")
-print(tele_mark(calls))
-
+print(tele_mark(texts,calls))
