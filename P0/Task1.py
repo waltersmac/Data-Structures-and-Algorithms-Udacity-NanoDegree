@@ -19,28 +19,25 @@ Print a message:
 "There are <count> different telephone numbers in the records."
 """
 
-# Create list for unique telephone numbers
-nums_list = []
-
 # Function for counting unique telephone numbers
 def count_nums(text_data, call_data):
-
-	# Adding numbers from texts.csv
-	for i in text_data:
-		for j in i[:-1]:
-			if j not in nums_list:
-				nums_list.append(j)
     
-    # Adding numbers from calls.csv
-	for k in call_data:
-		for l in k[:-1]:
-			if l not in nums_list:
-				nums_list.append(l)
-    
-    # return number of unique telephone numbers
-	return len(nums_list)
-		
+    # Create list for unique telephone numbers
+    nums_list = set()
 
-count_all_nums = count_nums(texts, calls)			
+    for i in text_data:
+    	if i[0] not in nums_list:
+    		nums_list.add(i[0])
+    	if i[1] not in nums_list:
+    		nums_list.add(i[1])
+
+    for i in call_data:
+    	if i[0] not in nums_list:
+    		nums_list.add(i[0])
+    	if i[1] not in nums_list:
+    		nums_list.add(i[1])
+
+
+    return 	len(nums_list)		
 			
-print("There are {} different telephone numbers in the records.".format(count_all_nums))
+print("There are {} different telephone numbers in the records.".format(count_nums(texts,calls)))
