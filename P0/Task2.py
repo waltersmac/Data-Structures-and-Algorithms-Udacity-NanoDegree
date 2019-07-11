@@ -29,9 +29,16 @@ def longest_dur(data):
     # Adding numbers from number initiating the call
     # and also receiving the call
     for i in data:
-    	calls_dict[i[0]] = int(i[3])
-    	calls_dict[i[1]] = int(i[3])
-    
+        if i[0] not in calls_dict:
+            calls_dict[i[0]] = int(i[3])
+
+        if i[1] not in calls_dict:
+            calls_dict[i[1]] = int(i[3])
+            
+        else:
+            calls_dict[i[0]] += int(i[3])
+            calls_dict[i[1]] += int(i[3])
+
     num_max = None
     num_dur = 0
     
