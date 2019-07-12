@@ -24,18 +24,16 @@ def count_nums(text_data, call_data):
     
     # Create list for unique telephone numbers
     nums_list = set()
-
+    
+    # Adding numbers from the texts data
     for i in text_data:
-    	if i[0] not in nums_list:
-    		nums_list.add(i[0])
-    	if i[1] not in nums_list:
-    		nums_list.add(i[1])
-
+    	nums_list.add(i[0])
+    	nums_list.add(i[1])
+    
+    # Adding numbers from the calls data
     for i in call_data:
-    	if i[0] not in nums_list:
-    		nums_list.add(i[0])
-    	if i[1] not in nums_list:
-    		nums_list.add(i[1])
+    	nums_list.add(i[0])
+    	nums_list.add(i[1])
 
 
     return 	len(nums_list)		
