@@ -26,14 +26,18 @@ The list of numbers should be print out one per line in lexicographic order with
 """
 
 def tele_mark(text_data, call_data):
-
+    
+    # Creating a set of numbers
 	list_of_numbers = set()
-
+    
+    # Creating sets for 'sent text', 'recieved text',
+    # 'incoming calls' and 'outgoing calls'
 	send_texts = set()
 	rec_texts = set()
 	incoming_calls = set()
 	outgoing_calls = set()
-
+    
+    # Sorting data into the relevant set
 	for i in text_data:
 		if i[0] not in send_texts:
 			send_texts.add(i[0])
@@ -47,7 +51,9 @@ def tele_mark(text_data, call_data):
 
 		if i[1] not in incoming_calls:
 			incoming_calls.add(i[1])
-
+    
+    # Adding only numbers that have made
+    # outgoing calls
 	for i in outgoing_calls:
 		if i not in send_texts and i not in rec_texts and i not in incoming_calls:
 			list_of_numbers.add(i)
