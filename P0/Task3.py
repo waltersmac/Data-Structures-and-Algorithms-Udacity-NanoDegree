@@ -47,29 +47,53 @@ The percentage should have 2 decimal digits
 # Part A
 def list_codes(data):
     
-    # Bangalore codes and prefixes
-	area_code = '080'
-	mob_prefix = ['7','8','9']
-	tele_mark = '140'
+    # fixed line telephones in Bangalore
+	tel_bang = '(080)'
 
-	# Creating list of codes
-	list_of_codes = []
+	# Creating list of possible calls
+	list_of_calls = []
     
-    # Adding Bangalore to the list
+    # Adding Bangalore numbers to the list
 	for i in calls:
-		if area_code in i[0]:
-			list_of_codes.append(area_code)
 
-		elif i[0][0] in mob_prefix:
-			list_of_codes.append(i[0][0:5])
+		# Fixed lines
+		if i[0].startswith(tel_bang):
+			list_of_calls.append(i[1])
 
-		elif tele_mark in i[0]:
-			list_of_codes.append(tele_mark)
+		# Mobile prefixes
+		if i[0][:5] == tel_bang and i[1][0] == '7':
+			list_of_calls.append([i[0],i[1]])
+		if i[0][:5] == tel_bang and i[1][0] == '8':
+			list_of_calls.append([i[0],i[1]])
+		if i[0][:5] == tel_bang and i[1][0] == '9':
+			list_of_calls.append([i[0],i[1]])
+
+		# Tele Marketing
+		if i[0][:5] == tel_bang and i[1][0:3] == '140':
+			list_of_calls.append([i[0],i[1]])
     
-    # Unique set of codes created
-	codes = sorted(set(list_of_codes))
+    # Creating set for the codes
+	area_codes = set()
+    
+    # Adding the codes
+	for i in list_of_calls:
 
-	return '\n'.join(codes)
+        # Fixed lines
+		if ')' in i:
+			p = i.split('(')
+			p = p[1].split(')')
+			area_codes.add(p[0])
+
+        # Mobile prefixes
+		if i[0] in ('7','8', '9'):
+			area_codes.add(i[:4])
+
+        # Tele Marketing
+		if i[0].startswith('140'):
+			area_codes.add(i[:2])
+
+	
+	return '\n'.join(sorted(area_codes))
 
 
 print("The numbers called by people in Bangalore have codes:")
@@ -79,23 +103,28 @@ print(list_codes(calls))
 # Part B
 def list_num(data):
     
-    # Bangalore codes and prefixes
-	area_code = '(080)'
-	mob_prefix = ['7','8','9']
-	tele_mark = '140'
-
-	# Creating list of numbers
-	num_calls = len(calls)
-	nums = 0
-
-    # Adding Bangalore to the list
-	for i in calls:
-		if area_code in i[0] and area_code in i[1]:
-			nums += 1
+    # fixed line telephones in Bangalore
+    tel_bang = '(080)'
     
+    # Creating list of possibe calls from Bangalore
+    poss_calls = []
+
+    # Bangalore fixed line to other Bangalore fixed line calls
+    fixed_calls = []
+
+
+    for i in data:
+    	if i[0][:5] == tel_bang:
+    		poss_calls.append(i[:2])
+
+    for j in poss_calls:
+    	if j[1][:5] == tel_bang:
+    		fixed_calls.append(j)
+    		
+
     # Calculating percentage of '080' numbers
-	percentage = (nums/num_calls) * 100
-	
-	return(round(percentage, 2))
+    percentage = (len(fixed_calls)/len(poss_calls)) * 100
+
+    return(round(percentage, 2))
 
 print("{} percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.".format(list_num(calls)))
