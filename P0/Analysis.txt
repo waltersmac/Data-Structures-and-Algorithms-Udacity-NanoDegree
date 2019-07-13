@@ -4,17 +4,17 @@ Task0
 The code in the task was constant, therefore the worse case 'Big 0' Notation is: 'O(1)'
 
 Task1
-The code in the task has a for loop within a for loop, therefore the worse case 'Big 0' Notation is: 'O(n^2)' 
+The code in the task has one for loop through the data, therefore the worse case 'Big 0' Notation is: 'O(n)' 
 
 Task2
 The code in the task has one for loop through the data, therefore the worse case 'Big 0' Notation is: 'O(n)'
 
 Task3
 Part A
-The code in the task has one for loop through the data, therefore the worse case 'Big 0' Notation is: 'O(n)' 
+The code in the task has one sorted function, therefore the worse case 'Big 0' Notation is: 'O(nlogn)' 
 
 Part B
 The code in the task has one for loop through the data, therefore the worse case 'Big 0' Notation is: 'O(n)' 
 
 Task4
-The code in the task has one for loop through the data, therefore the worse case 'Big 0' Notation is: 'O(n)' 
+The code in the task has one sorted function, therefore the worse case 'Big 0' Notation is: 'O(nlogn)' 
