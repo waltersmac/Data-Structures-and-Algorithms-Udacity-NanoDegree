@@ -2,7 +2,9 @@ class LRU_Cache(object):
 
     def __init__(self, capacity):
         # Initialize class variables
-        pass
+        self.capacity = capacity
+        self.hit = None
+        self.miss = None
 
     def get(self, key):
         # Retrieve item from provided key. Return -1 if nonexistent. 
