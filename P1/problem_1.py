@@ -18,8 +18,8 @@ class LRU_Cache(object):
         	self.cache[key] = value
 
         if len(self.cache) > self.capacity:
-            self.cache.popitem()
-
+            self.cache.pop(1)
+            self.cache[key] = value
 
         print(self.cache)
         
