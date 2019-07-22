@@ -2,25 +2,26 @@ class LRU_Cache(object):
 
     def __init__(self, capacity):
         # Initialize class variables
-        self.cache = {}
-        self.key = 0
-        self.value = 0
         self.capacity = capacity
+        self.cache = {}
 
     def get(self, key):
         # Retrieve item from provided key. Return -1 if nonexistent. 
-        if key < self.capacity:
-        	return key
+        if key in self.cache:
+        	return self.cache[key]
         return -1
 
     def set(self, key, value):
         # Set the value if the key is not present in the cache. If the cache is at capacity remove the oldest item.
-        if key < self.capacity:
-        	self.cache[key] = value
-        else:
-        	self.cache[self.capacity] = value
-
         
+        if key not in self.cache:
+        	self.cache[key] = value
+
+        if len(self.cache) > self.capacity:
+            self.cache.popitem()
+
+
+        print(self.cache)
         
 
 our_cache = LRU_Cache(5)
