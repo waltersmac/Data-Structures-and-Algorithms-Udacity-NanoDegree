@@ -16,24 +16,25 @@ def find_files(suffix, path):
     Returns:
        a list of paths
     """
-    paths = []
+    
+    # paths to return
     list_of_paths = []
 
+    # Listing files and directories in path
     current_dir = os.listdir(path)
-    paths.append(path)
     
+    # iterating through files and directories
     for item in current_dir:
         new_path = os.path.join(path,item)
-
-        print(new_path)
-
+        
         if os.path.isdir(new_path):
-            find_files(suffix, new_path)
-            paths.append(new_path)
+            list_of_paths.extend(find_files(suffix, new_path))
         else:
-            paths.append(new_path)
-    
-    return paths
+            if new_path.endswith(suffix):
+                list_of_paths.append(new_path)
+
+    return list_of_paths
+
 
 suffix = ".c"
 path = './testdir'
