@@ -4,8 +4,6 @@ class LRU_Cache(object):
 
     def __init__(self, capacity):
         # Initialize class variables
-
-        # Creating Ordered Dictionary
         self.cache = OrderedDict()
         self.capacity = capacity
 
