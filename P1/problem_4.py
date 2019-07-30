@@ -40,4 +40,9 @@ def is_user_in_group(user, group):
       user(str): user name/id
       group(class:Group): group to check user membership against
     """
-    return None
+
+    
+    return 
+
+
+print(is_user_in_group())

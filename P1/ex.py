@@ -8,7 +8,7 @@ import os
 print (os.listdir("./testdir"))
 
 # Let us check if this file is indeed a file!
-print (os.path.isfile("./ex.py"))
+print (os.path.isfile("testdir/t1.c"))
 
 # Does the file end with .py?
 print ("./ex.py".endswith(".py"))

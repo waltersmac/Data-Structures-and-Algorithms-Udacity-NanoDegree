@@ -32,16 +32,16 @@ def to_set(data):
         else:
             char_freq[letter] = 1
     
-    char_freq = [(k, v) for k, v in char_freq.items()]
+    char_freq = [(v, k) for k, v in char_freq.items()]
 
-    return char_freq
+    return sorted(char_freq, reverse=True)
 
 
 
 
 def huffman_encoding(data):
 
-    char_tuple = to_set(data)
+    return to_set(data)
     
     
 
