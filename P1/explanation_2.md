@@ -1,2 +1,2 @@
 # Problem_2 Explanation documents
-Trees data sctructure
+I decide to write a recursion algorithm.
