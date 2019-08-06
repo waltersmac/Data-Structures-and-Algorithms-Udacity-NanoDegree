@@ -19,6 +19,10 @@ class Group(object):
     def get_name(self):
         return self.name
 
+    
+
+
+
 
 parent = Group("parent")
 child = Group("child")
@@ -40,9 +44,13 @@ def is_user_in_group(user, group):
       user(str): user name/id
       group(class:Group): group to check user membership against
     """
-
     
-    return 
+    return group.name
+
+print(is_user_in_group("sub_child_user",parent))
 
 
-print(is_user_in_group())
+
+
+
+
