@@ -8,17 +8,9 @@ class Node:
 
 
 class LinkedList:
+
     def __init__(self):
         self.head = None
-
-    def __str__(self):
-        cur_head = self.head
-        out_string = ""
-        while cur_head:
-            out_string += str(cur_head.value) + " -> "
-            cur_head = cur_head.next
-        return out_string
-
 
     def append(self, value):
 
@@ -32,22 +24,33 @@ class LinkedList:
 
         node.next = Node(value)
 
-    def size(self):
-        size = 0
-        node = self.head
-        while node:
-            size += 1
-            node = node.next
 
-        return size
+    def to_list(self):
+        out_list = []
+        cur_head = self.head
+        while cur_head:
+            out_list.append(cur_head.value)
+            cur_head = cur_head.next
+        return out_list
+
+
+
 
 def union(llist_1, llist_2):
-    # Your Solution Here
-    pass
+    
+    return sorted(set(llist_1 + llist_2))
+
+
 
 def intersection(llist_1, llist_2):
-    # Your Solution Here
-    pass
+    
+    intersection_list = []
+
+    for i in llist_1:
+        if i in llist_2:
+            intersection_list.append(i)
+
+    return sorted(set(intersection_list))
 
 
 
@@ -67,8 +70,10 @@ for i in element_1:
 for i in element_2:
     linked_list_2.append(i)
 
-print (union(linked_list_1,linked_list_2))
-print (intersection(linked_list_1,linked_list_2))
+print (union(linked_list_1.to_list(),linked_list_2.to_list()))
+print (intersection(linked_list_1.to_list(),linked_list_2.to_list()))
+
+
 
 # Test case 2
 
@@ -84,5 +89,5 @@ for i in element_1:
 for i in element_2:
     linked_list_4.append(i)
 
-print (union(linked_list_3,linked_list_4))
-print (intersection(linked_list_3,linked_list_4))
+print (union(linked_list_3.to_list(),linked_list_4.to_list()))
+print (intersection(linked_list_3.to_list(),linked_list_4.to_list()))
