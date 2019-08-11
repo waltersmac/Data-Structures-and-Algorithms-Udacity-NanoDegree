@@ -1,128 +1,107 @@
 import sys
-from collections import deque
+import heapq
 
 
 class Node(object):
         
-    def __init__(self,char, freq):
-        self.char = value
+    def __init__(self, char, freq):
+        self.char = char
         self.freq = freq
         self.left = None
         self.right = None
-        
-    def set_value(self,value):
-        self.value = value
-        
-    def get_value(self):
-        return self.value
-        
-    def set_left_child(self,left):
-        self.left = left
-        
-    def set_right_child(self, right):
-        self.right = right
-        
-    def get_left_child(self):
-        return self.left
-    
-    def get_right_child(self):
-        return self.right
 
-    def has_left_child(self):
-        return self.left != None
-    
-    def has_right_child(self):
-        return self.right != None
-    
-    # define __repr_ to decide what a print statement displays for a Node object
-    def __repr__(self):
-        return f"Node({self.get_value()})"
-    
-    def __str__(self):
-        return f"Node({self.get_value()})"
+    def __cmp__(self, other):
+        if(other == None):
+            return -1
+        if(not isinstance(other, HeapNode)):
+            return -1
+        return self.freq > other.freq
 
-
-
-class Queue():
-    def __init__(self):
-        self.q = deque()
-        
-    def enq(self,value):
-        self.q.appendleft(value)
-        
-    def deq(self):
-        if len(self.q) > 0:
-            return self.q.pop()
-        else:
-            return None
-    
-    def __len__(self):
-        return len(self.q)
-    
-    def __repr__(self):
-        if len(self.q) > 0:
-            s = "<enqueue here>\n_________________\n" 
-            s += "\n_________________\n".join([str(item) for item in self.q])
-            s += "\n_________________\n<dequeue here>"
-            return s
-        else:
-            return "<queue is empty>"
-
-
+    # defining comparators less_than and equals
+    def __lt__(self, other):
+        return self.freq < other.freq
 
 
 class TreeLinkedList:
 
     def __init__(self):
-        self.root = None
-        
-    def set_root(self,value):
-        self.root = Node(value)
-
-    def get_root(self):
-        return self.root
-
-    def combine_nodes(self, node1, node2):
-        pass
+        self.heap = []
+        self.codes = {}
+        self.reverse_mapping = {}
 
 
-    # Helper function - Create set of tuples lowest to highest frequencies
-    def to_set(self, data):
+    def make_frequency_dict(self, text):
+        frequency = {}
+        for character in text:
+            if not character in frequency:
+                frequency[character] = 0
+            frequency[character] += 1
+        return frequency
 
-        data = list(data)
-        char_freq = {}
 
-        for letter in data:
-            if letter in char_freq:
-                char_freq[letter] += 1
-            else:
-                char_freq[letter] = 1
+    def make_heap(self, frequency):
+        for key, value in frequency.items():
+            node = Node(key, value)
+            heapq.heappush(self.heap, node)
+
+
+    def merge_nodes(self):
+        while(len(self.heap)>1):
+            node1 = heapq.heappop(self.heap)
+            node2 = heapq.heappop(self.heap)
+            
+
+            merged = Node(node1.char + node2.char, node1.freq + node2.freq)
+            merged.left = node1
+            merged.right = node2
+
+            heapq.heappush(self.heap, merged)
+
+
+    def make_codes_helper(self, root, current_code):
+        if root is None:
+            return
+
+        else:
+            self.codes[root.char] = current_code
+            self.reverse_mapping[current_code] = root.char
+            
+            self.make_codes_helper(root.left, current_code + "0")
+            self.make_codes_helper(root.right, current_code + "1")
+
+
+    def make_codes(self):
+        root = heapq.heappop(self.heap)
+        current_code = ""
+        self.make_codes_helper(root, current_code)
+
     
-        char_freq = [(v, k) for k, v in char_freq.items()]
-
-        return sorted(char_freq)
+    def get_encoded_text(self, text):
+        encoded_text = ""
+        for character in text:
+            encoded_text += self.codes[character]
+        return encoded_text
+    
         
-
-
 
 
 def huffman_encoding(data):
 
     tree = TreeLinkedList()
-    letter_freq = tree.to_set(data)
-    return letter_freq
-    #return sorted(combine(nodes), reverse=True)
+    letter_freq = tree.make_frequency_dict(data)
 
+    tree.make_heap(letter_freq)
+    tree.merge_nodes()
+    tree.make_codes()
 
+    encoded_text = tree.get_encoded_text(data)
 
-
+    return encoded_text, tree
+    
+    
 
 def huffman_decoding(data,tree):
     pass
-
-
-
-
 
 
 
@@ -136,12 +115,10 @@ if __name__ == "__main__":
     print ("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))
     print ("The content of the data is: {}\n".format(a_great_sentence))
     
-    print(huffman_encoding(a_great_sentence))
-    
-    #encoded_data, tree = huffman_encoding(a_great_sentence)
+    encoded_data, tree = huffman_encoding(a_great_sentence)
 
-    #print ("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
-    #print ("The content of the encoded data is: {}\n".format(encoded_data))
+    print ("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
+    print ("The content of the encoded data is: {}\n".format(encoded_data))
 
     #decoded_data = huffman_decoding(encoded_data, tree)
 
