@@ -82,6 +82,14 @@ class TreeLinkedList:
             encoded_text += self.codes[character]
         return encoded_text
     
+    def get_decoded_text(self):
+        cleaned = {}
+        for key, value in self.reverse_mapping.items():
+            if len(value) == 1:
+                cleaned[key] = value
+
+        return cleaned
+
         
 
 
@@ -101,7 +109,24 @@ def huffman_encoding(data):
     
 
 def huffman_decoding(data,tree):
-    pass
+    '''
+    Decodes text enconded with basis on
+    reverse mapping table
+    '''
+
+    cleaned = tree.get_decoded_text()
+
+    current = ""
+    decoded_text = ""
+    
+    for bit in data:
+        current += bit
+        if (current in cleaned):
+            character = cleaned[current]
+            decoded_text += character
+            current = ""
+    
+    return decoded_text
 
 
 
@@ -120,7 +145,7 @@ if __name__ == "__main__":
     print ("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
     print ("The content of the encoded data is: {}\n".format(encoded_data))
 
-    #decoded_data = huffman_decoding(encoded_data, tree)
+    decoded_data = huffman_decoding(encoded_data, tree)
 
-    #print ("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
-    #print ("The content of the encoded data is: {}\n".format(decoded_data))
+    print ("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
+    print ("The content of the encoded data is: {}\n".format(decoded_data))
