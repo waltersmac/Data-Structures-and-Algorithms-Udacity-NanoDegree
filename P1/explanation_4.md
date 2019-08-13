@@ -1,1 +1,2 @@
 # Problem_4 Explanation documents
+I decide to write a recursion algorithm as I felt that to find the user the algortihm would need to be called again to check the next sub-group. The efficiency of the algorithm is O(n) as it needs to check each group before moving to the next sub-group. The space complexity would be O(K) K being the number of group and sub-group levels.

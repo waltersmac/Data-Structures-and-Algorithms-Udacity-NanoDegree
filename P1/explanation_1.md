@@ -1,1 +1,2 @@
 # Problem_1 Explanation documents
+I decided to use the OrderedDict module as I felt that it would be more effiecient when looking up for the required keys and there would be no need to loop over the data continuously. All operations take O(1) time for the efficiency of the algorithm, this includes the OrderedDict module operations like pop(item) and popitem(last=False) as there are also O(1). The space complexity for this algorithm would be O(1), due to the limit of the cache. Once the limit is set, it wont change.

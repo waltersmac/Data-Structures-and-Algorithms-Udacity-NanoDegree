@@ -1,2 +1,2 @@
 # Problem_2 Explanation documents
-I decide to write a recursion algorithm.
+I decide to write a recursion algorithm as I felt that it would be more effiecient when filtering through the file paths. Each file path would need to be checked until there were no more. The efficiency of the algorithm is O(n) as it needs to check each files before moving to the next level of the path. The space complexity will depend on weather the algorithm finds a file with the required suffix, so I would say the space complexity is O(n).
