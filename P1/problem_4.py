@@ -39,6 +39,7 @@ parent.add_group(child)
 
 
 
+
 def is_user_in_group(user, group):
     """
     Return True if user is in the group, False otherwise.
@@ -59,10 +60,7 @@ def is_user_in_group(user, group):
     return False
 
 
-print(is_user_in_group("child_user",parent.groups))
-
-
-
-
-
-
+print(is_user_in_group("child_user",parent.groups))  # Returns True as child_user is found
+print(is_user_in_group("child_user1",parent.groups)) # Returns False as child_user1 is not found
+print(is_user_in_group("sub_child_user",parent.groups)) # Returns True as sub_child_user is found
+print(is_user_in_group("",parent.groups)) # Returns False as no user in string

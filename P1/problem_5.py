@@ -16,10 +16,14 @@ class Block:
 	def calc_hash(self):
 		sha = hashlib.sha256()
 		string = self.data
-		hash_str = string.encode('utf-8')
-		sha.update(hash_str)
+		if string == None:
+			return "No hash created"
 
-		return sha.hexdigest()
+		else:
+			hash_str = string.encode('utf-8')
+			sha.update(hash_str)
+
+			return sha.hexdigest()
 
 
 
@@ -29,7 +33,7 @@ class BlockChain(object):
 		self.head = None
 		self.tail = None
         
-	def append(self, timestamp, data):
+	def append(self, timestamp, data=None):
 		
 		if self.head is None:
 			self.head = Block(timestamp, data, 0)
@@ -47,12 +51,14 @@ class BlockChain(object):
 timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 chain = BlockChain()
-chain.append(timestamp, "Block")
-chain.append(timestamp, "Block2")
-chain.append(timestamp, "Block3")
-chain.append(timestamp, "Block4")
+chain.append(timestamp, "Block") # Adding Block1
+chain.append(timestamp, "Block2") # Adding Block1
+chain.append(timestamp, "Block3") # Adding Block1
+chain.append(timestamp, "Block4") # Adding Block1
+chain.append(timestamp, ) # Adding no data
+chain.append(timestamp, "Block6") # Adding empty string
 
-
+# Prints out each block in the chain and each block references the previous hash
 block = chain.head
 while block:
     print([block.timestamp, block.data, block.hash, block.previous_hash])
