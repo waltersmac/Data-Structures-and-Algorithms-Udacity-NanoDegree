@@ -1,7 +1,9 @@
 # A RouteTrie will store our routes and their associated handlers
 class RouteTrie:
-    def __init__(self, ...):
+    def __init__(self, path):
         # Initialize the trie with an root node and a handler, this is the root path or home page node
+        self.root = None
+        self.handler = path
 
     def insert(self, ...):
         # Similar to our previous example you will want to recursively add nodes
@@ -16,6 +18,7 @@ class RouteTrieNode:
     def __init__(self, ...):
         # Initialize the node with children as before, plus a handler
 
+
     def insert(self, ...):
         # Insert the node as before
 
@@ -26,6 +29,7 @@ class Router:
     def __init__(self, ...):
         # Create a new RouteTrie for holding our routes
         # You could also add a handler for 404 page not found responses as well!
+        self.RouteTrie = ???
 
     def add_handler(self, ...):
         # Add a handler for a path
@@ -42,7 +46,7 @@ class Router:
 
     def split_path(self, ...):
         # you need to split the path into parts for 
-        # both the add_handler and loopup functions,
+        # both the add_handler and lookup functions,
         # so it should be placed in a function here
 
 
