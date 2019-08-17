@@ -12,7 +12,16 @@ Example:
 
 Input: nums = [4,5,6,7,0,1,2], target = 0, Output: 4
 '''
+def find_pivot(input_list):
 
+    for index in range(1,len(input_list)-1):
+        if input_list[index-1] < input_list[index]:
+            continue
+
+        bottom_list = input_list[:index-1]
+        top_list = input_list[index:]
+
+    return bottom_list, top_list
 
 
 
@@ -26,7 +35,7 @@ def rotated_array_search(input_list, number):
        int: Index or -1
     """
 
-    pass
+    print(find_pivot(input_list))
 
 
 
@@ -49,5 +58,5 @@ def test_function(test_case):
 test_function([[6, 7, 8, 9, 10, 1, 2, 3, 4], 6])
 test_function([[6, 7, 8, 9, 10, 1, 2, 3, 4], 1])
 test_function([[6, 7, 8, 1, 2, 3, 4], 8])
-test_function([[6, 7, 8, 1, 2, 3, 4], 1])
-test_function([[6, 7, 8, 1, 2, 3, 4], 10])
+#test_function([[6, 7, 8, 1, 2, 3, 4], 1])
+#test_function([[6, 7, 8, 1, 2, 3, 4], 10])
