@@ -18,11 +18,28 @@ def find_pivot(input_list):
         if input_list[index-1] < input_list[index]:
             continue
 
-        bottom_list = input_list[:index-1]
-        top_list = input_list[index:]
+        return index
 
-    return bottom_list, top_list
 
+def binary_search(array, target):
+    lowindex = 0
+    highindex = len(array) - 1
+
+    while lowindex <= highindex:
+
+        mid_index = (highindex + lowindex) // 2
+        mid_element = array[mid_index]
+
+        if target == mid_element:
+            return mid_index
+
+        elif target < mid_element:
+            highindex=mid_index-1
+
+        else:
+            lowindex = mid_index + 1
+
+    return -1
 
 
 def rotated_array_search(input_list, number):
@@ -35,16 +52,23 @@ def rotated_array_search(input_list, number):
        int: Index or -1
     """
 
-    print(find_pivot(input_list))
+    pivot_index = find_pivot(input_list)
+
+    if number >= input_list[0]:
+        return binary_search(input_list[:pivot_index], number)
+
+    else:
+        return pivot_index + binary_search(input_list[pivot_index:], number)
 
 
 
+
+# Testing
 def linear_search(input_list, number):
     for index, element in enumerate(input_list):
         if element == number:
             return index
     return -1
-
 
 
 def test_function(test_case):
@@ -58,5 +82,6 @@ def test_function(test_case):
 test_function([[6, 7, 8, 9, 10, 1, 2, 3, 4], 6])
 test_function([[6, 7, 8, 9, 10, 1, 2, 3, 4], 1])
 test_function([[6, 7, 8, 1, 2, 3, 4], 8])
-#test_function([[6, 7, 8, 1, 2, 3, 4], 1])
-#test_function([[6, 7, 8, 1, 2, 3, 4], 10])
+test_function([[6, 7, 8, 1, 2, 3, 4], 1])
+test_function([[6, 7, 8, 1, 2, 3, 4], 10])
+
