@@ -20,13 +20,14 @@ def get_min_max(ints):
     	else:
     		continue
     	
-
     return (min_num,max_num)
-    
+
+
+
 ## Example Test Case of Ten Integers
 import random
 
-l = [i for i in range(0, 10)]  # a list containing 0 - 9
+l = [i for i in range(0, 11)]  # a list containing 0 - 9
 random.shuffle(l)
 
 print ("Pass" if ((min(l), max(l)) == get_min_max(l)) else "Fail")
