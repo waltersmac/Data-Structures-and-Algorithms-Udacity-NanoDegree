@@ -68,6 +68,9 @@ class Router:
         # Add a handler for a path
         # You will need to split the path and pass the pass parts
         # as a list to the RouteTrie
+        
+        if len(path) < 1:
+            return self.no_page
 
         path = self.split_path(path)
 
@@ -120,9 +123,33 @@ router = Router("root handler", "not found handler") # remove the 'not found han
 router.add_handler("/home/about", "about handler")  # add a route
 
 # some lookups with the expected output
-#print(router.lookup("/")) # should print 'root handler'
-#print(router.lookup("/home")) # should print 'not found handler' or None if you did not implement one
-#print(router.lookup("/home/about")) # should print 'about handler'
-#print(router.lookup("/home/about/")) # should print 'about handler' or None if you did not handle trailing slashes
-#print(router.lookup("/home/about/me")) # should print 'not found handler' or None if you did not implement one
+print("This is the Test")
+print(router.lookup("/")) # should print 'root handler'
+print(router.lookup("/home")) # should print 'not found handler' or None if you did not implement one
+print(router.lookup("/home/about")) # should print 'about handler'
+print(router.lookup("/home/about/")) # should print 'about handler' or None if you did not handle trailing slashes
+print(router.lookup("/home/about/me")) # should print 'not found handler' or None if you did not implement one
+
+
+
+# create the router and add a route
+router1 = Router("root handler", "not found handler") # remove the 'not found handler' if you did not implement this
+router1.add_handler("/home/extension/folder1/folder2", "Folder2 handler")  # add a route
+
+# some lookups with the expected output
+print("This is the Test 1")
+print(router1.lookup("/")) # should print 'root handler'
+print(router1.lookup("/home")) # should print 'not found handler'
+print(router1.lookup("/home/extension/")) # should print 'not found handler'
+print(router1.lookup("/home/extension/folder1")) # should print 'not found handler'
+print(router1.lookup("/home/extension/folder1/folder2")) # should print 'folder2 handler'
+
+
+# create the router and add a route
+router2 = Router("root handler", "not found handler") # remove the 'not found handler' if you did not implement this
+router2.add_handler("/", "Empty handler")  # add a route
+
+# some lookups with the expected output
+print("This is the Test 2")
+print(router2.lookup("//")) # should print 'not found handler'
 
