@@ -1,1 +1,2 @@
-explanation_7.md
+## Explanation 7
+The efficiency of the algorith is O(n), this is because there is only one iteration of the input for each class and method. The input data is string, it is then split into an array so that it can be parsed into the Trie data structure. The output is also a string, which confirms if the handler is found or not.
