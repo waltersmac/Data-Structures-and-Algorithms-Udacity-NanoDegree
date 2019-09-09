@@ -15,9 +15,7 @@ class Node():
     def __eq__(self, other):
         return self.position == other.position
     
-    
-          
-    
+       
 
 def shortest_path(roads, intersections,start,goal):
     print("shortest path called")
@@ -28,9 +26,9 @@ def shortest_path(roads, intersections,start,goal):
     
     
     # Create start and end node
-    start_node = Node(None, (start_cords[0],start_cords[1]))
+    start_node = Node(start, (start_cords[0],start_cords[1]))
     start_node.g = start_node.h = start_node.f = 0
-    end_node = Node(None, (goal_cords[0],goal_cords[1]))
+    end_node = Node(start, (goal_cords[0],goal_cords[1]))
     end_node.g = end_node.h = end_node.f = 0
 
     # Initialize both open and closed list
@@ -47,47 +45,55 @@ def shortest_path(roads, intersections,start,goal):
         # Get the current node
         current_node = open_list[0]
         current_index = 0
+        current_pos = start
         for index, item in enumerate(open_list):
             if item.f < current_node.f:
                 current_node = item
                 current_index = index
-
-
+                current_pos = item.parent
+                #print(current_pos)
+                
+                
 
         # Pop current off open list, add to closed list
         open_list.pop(current_index)
         closed_list.append(current_node)
 
+        print(open_list)
+
         # Found the goal
+        path = []
+        path.append(start)
+        print(path)
+        
         if current_node == end_node:
-            path = []
             current = current_node
             while current is not None:
-                path.append(current.parent)
-                current = current.parent
-            return path
+                print(current_node.position)
+
         
         # Generate children
         children = []
+
         for new_position in roads[start]:
 
             # Get node position
             node_position = (intersections[new_position][0], intersections[new_position][1])
 
             # Create new node
-            new_node = Node(current_node, node_position)
+            new_node = Node(new_position, node_position)
 
             # Append
             children.append(new_node)
-            
+         
+
             
         # Loop through children
         for child in children:
 
             # Child is on the closed list
-            for closed_child in closed_list:
-                if child == closed_child:
-                    continue
+            if child in closed_list:
+                continue
       
             # Create the f, g, and h values
             child.g = current_node.g + math.sqrt(((child.position[0] - current_node.position[0]) ** 2) + ((child.position[1] - current_node.position[1]) ** 2))
@@ -101,6 +107,13 @@ def shortest_path(roads, intersections,start,goal):
 
             # Add the child to the open list
             open_list.append(child)
+
+
+               
+        
+        
+
+
         
 
 path = shortest_path(M.roads,M.intersections, 5, 34)
