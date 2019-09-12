@@ -45,18 +45,20 @@ def shortest_path(roads, intersections,start,goal):
     # 
     while len(open_list) > 0:
         
+        current = min(open_list, key=lambda o:o.g + o.h)
+        print(current)
+
         # Get the current node
         current_node = open_list[0]
-        #print("current_node start",current_node.parent,current_node.position[0],current_node.position[1])
+        print(current_node.parent)
         current_index = 0
         for index, item in enumerate(open_list):
-            if (item.f < current_node.f and item.h == 0):
+            
+            if item.f < current_node.f or item.f == 0:
             	current_node = item
-            	current_index = index
-                
+            	current_index = index       
 
                 
-        #print("current_node",current_node.parent,current_node.position[0],current_node.position[1])       
 
         # Pop current off open list, add to closed list
         open_list.pop(current_index)
@@ -85,12 +87,11 @@ def shortest_path(roads, intersections,start,goal):
 
             # Append
             children.append(new_node)
-            
-        #print("current_node mid",current_node.parent,current_node.position[0],current_node.position[1])
 
             
         # Loop through children
         for child in children:
+
 
             # Child is on the closed list
             if child in closed_list:
@@ -99,26 +100,23 @@ def shortest_path(roads, intersections,start,goal):
             #print("current pos",current_node.parent,current_node.position[0],current_node.position[1],"child pos", child.position[0],child.position[1])
             # Create the f, g, and h values
             #print(((child.position[0] - current_node.position[0]) ** 2) + ((child.position[1] - current_node.position[1]) ** 2))
-            child.g = current_node.g + math.sqrt(((child.position[0] - current_node.position[0])**2) + ((child.position[1] - current_node.position[1])**2))
+            if child in open_list:
+
+                child.g = current_node.g + math.sqrt(((child.position[0] - current_node.position[0])**2) + ((child.position[1] - current_node.position[1])**2))
             
-            xVal = abs((child.position[0] - end_node.position[0]))
-            yVal = abs((child.position[1] - end_node.position[1]))
-            child.h = max(xVal, yVal) + ((math.sqrt(2)-1)*min(xVal, yVal))
+                xVal = ((child.position[0] - end_node.position[0])**2)
+                yVal = ((child.position[1] - end_node.position[1])**2)
+                child.h = math.sqrt(xVal + yVal)
 
-            child.f = child.g + child.h
+                child.f = child.g + child.h
 
-            # Child is already in the open list
-            if len([open_node for open_node in open_list if child == open_node and child.g > open_node.g]) > 0:
-                continue
+            print("child g", child.g, "child h", child.h,"child f", child.f)
+            
 
             # Add the child to the open list
             open_list.append(child)
-            print("end",child.parent, "f", child.f, "h",child.h,"g", child.g)
-            
-
-
-
-               
+        
+        
 
 path = shortest_path(M.roads,M.intersections, 8, 24)
 if path == [8, 14, 16, 37, 12, 17, 10, 24]:
