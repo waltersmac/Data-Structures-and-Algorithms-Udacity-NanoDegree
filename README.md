@@ -5,10 +5,8 @@ In this course I am currently learning data structures and algorithms by solving
 
 
 
-## Introduction
-* An overview of your program. 
-* Meet your instructors, and refresh my Python skills. 
-* Learnt the framework to deconstruct any open-ended problem and then understand the concepts of time and space complexity.
+## Introduction 
+* I learnt the framework to deconstruct any open-ended problem and then understand the concepts of time and space complexity.
 
 ### P0 - Unscramble computer science problems
 Deconstructed a series of open-ended problems into smaller components (e.g, inputs, outputs, series of functions).
@@ -16,7 +14,7 @@ Deconstructed a series of open-ended problems into smaller components (e.g, inpu
 
 
 ## Data Sctructures
-* Learnt different data structures that can be used to store data. 
+* I learnt different data structures that can be used to store data. 
 * Implemented different methods used to manipulate these data structures and examine the efficiency. Understood the advantages and applications of different data structures. 
 * Learnt how to approach open ended problems (either in interview or real-world) and select appropriate data structures based on requirements.
 
